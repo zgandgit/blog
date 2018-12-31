@@ -1,27 +1,10 @@
-# blog
+觉得掘金的界面做的很好看
+一直想做一个个人博客但是找了好久模板没有找到
+知道看到掘金的前端页面觉得很好看于是就用vue 模仿着做了一个个人的博客前端页面
+还未完全完成 但是也差不多了
+想下载的可以去下载
+UI 框架用的是element
+vue.js 2
 
-> A Vue.js project
+我叫周光 --------------------谢谢
 
-## Build Setup
-
-``` bash
-# install dependencies
-npm install
-
-# serve with hot reload at localhost:8080
-npm run dev
-
-# build for production with minification
-npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
-
-# run unit tests
-npm run unit
-
-# run all tests
-npm test
-```
-
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
