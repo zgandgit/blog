@@ -1,23 +1,172 @@
 <template>
-  <el-container>
-    <el-header class="bg-c1">
-      <head-view></head-view>
-    </el-header>
-    <el-main>
-      <div class="container">
-        <el-row>
-          <div class="bg-c1 menu-cx main-l">
+      <div class="bg-c1 menu-cx main-l">
 
-            <div class="article-suspended-panel">
-              <div class="like-btn panel-btn like-adjust with-badge" style="background-image: url('https://b-gold-cdn.xitu.io/v3/static/img/zan.b4bb964.svg')">
-                  <span>666</span>
+        <div class="article-suspended-panel">
+          <div class="like-btn panel-btn like-adjust with-badge" style="background-image: url('https://b-gold-cdn.xitu.io/v3/static/img/zan.b4bb964.svg')">
+            <span>666</span>
+          </div>
+          <div class="like-btn panel-btn like-adjust with-badge" style="background-image: url('https://b-gold-cdn.xitu.io/v3/static/img/comment.7fc22c2.svg')">
+            <span>666</span>
+          </div>
+          <div class="share-title">分享</div>
+          <div class="like-btn panel-btn like-adjust with-badge" style="background-image: url('https://b-gold-cdn.xitu.io/v3/static/img/weibo.2076a57.svg')">
+          </div>
+        </div>
+
+        <div class="detail">
+          <div class="top">
+            <h5 class="title">{{data.title}}</h5>
+            <ul class="desc">
+              <li class="item hot">
+                热
+              </li>
+              <li class="item post">
+                专栏
+              </li>
+              <li class="item cursor-p tag">
+                得瑟得瑟
+              </li>
+              <li class="item cursor-p">
+                但是当时的
+              </li>
+              <li class="item cursor-p tag">
+                但是当时的
+              </li>
+              <li class="item cursor-p tag">
+                2018年6月23日
+              </li>
+            </ul>
+
+          </div>
+          <div class="article-content">
+
+            在npm、yarn等包管理工具的帮助下，前端工程化模块化的进程日益加快，项目的依赖包也日益增大，特别是若项目采用webpack来构建用到许多webpack的插件、一些辅助开发如（eslint、postcss、dev-server之类的库）以及一些单元测试(jest、mocha、enzyme)可能需要用到的插件，项目中的node_module就会变的十分庞大。
+            如图：
+
+            如果搭配这种情况是不是很绝望：
+
+            因此团队开发者每次重新初始化项目进行npm install会十分缓慢，并且若占用大量空间，更进一步来说项目中往往很多前端团队会用到一台构建服务器，对前端项目的代码获取、打包、构建、部署进行管理（例如笔者自己所在的团队就在使用jenkins对前端项目的打包、构建、部署进行自动化托管）。npm这样的项目级依赖管理的特性就会造成大量的时间以及资源的消耗。
+            同时笔者也想在文章开始之前表明一个态度，npm本身portable的模块化设计，使每个项目互不干系，也是一种它设计的精华所在，本文仅是针对实际使用中遇到的一些小困扰进行解读，希望提供一个新的思路。
+            补充一下，实际yarn已经有了解决方案 - workspaces：
+            Workspaces in Yarn
+            本文暂不把yarn容纳到讨论范围内。
+            此本篇文章就在这样的背景下诞生了。纯粹是笔者在项目中积累的一些经验，若有不足望指出。
+            二、先来说说示例
+            github仓库地址：github.com/Roxyhuang/n…
+            通常现代前端的标准工程往往具备以下功能，为了让这个讨论更贴近实际开发，并且更直观，因此规定示例项目基本具备以下这些能力：
+            (1) 提供dev-server
+            (2) 提供语法转译（babel）
+            (3) 能够解析样式
+            (4) js代码风格插件以及样式风格检查
+            (5) 单元测试
+            (6) 提供样式兼容处理
+            当然以上部分只体现的依赖层面。因此可能有些依赖的引入可能出现错误或者不合理。
+            并假设目前团队使用了webpack和parcel两套前端构建方案，团队项目中有使用了React和Vue。
+            三、问题的总结
+            若不对项目做任何优化以及设置正常项目的依赖的结构应该是这样的：
+            如图：
+
+            作者：Neo_Huang
+            链接：https://juejin.im/post/5c277dec6fb9a049a62caa99
+            来源：掘金
+            著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+
+          </div>
+
+          <div class="comment-list-box">
+            <div class="title">评论</div>
+            <div class="comment-form">
+              <div class="avatar-box">
+                <div class="avatar" style="background-image: url('https://avatars0.githubusercontent.com/u/16717068?v=3')"></div>
               </div>
-              <div class="like-btn panel-btn like-adjust with-badge" style="background-image: url('https://b-gold-cdn.xitu.io/v3/static/img/comment.7fc22c2.svg')">
-                <span>666</span>
+              <div class="form-box">
+                <div class="input-box">
+                  <div class="rich-input empty" contenteditable="true" spellcheck="true" placeholder="输入评论...">
+
+                  </div>
+                </div>
+                <div class="action-box">
+                  <div class="emoji emoji-btn">
+                    <div class="emoji-box">
+                      <div class="icon" style="background-image: url('https://b-gold-cdn.xitu.io/v3/static/img/emoji.5594dbb.svg')"></div>
+                      <span>表情</span>
+                    </div>
+                  </div>
+
+
+                </div>
+                <div class="submit">
+                  <span>Ctrl or ⌘ + Enter</span>
+                  <button class="submit-btn">评论</button>
+
+                </div>
+
               </div>
-              <div class="share-title">分享</div>
-              <div class="like-btn panel-btn like-adjust with-badge" style="background-image: url('https://b-gold-cdn.xitu.io/v3/static/img/weibo.2076a57.svg')">
+
+
+            </div>
+
+            <div class="comment-list">
+              <div class="item">
+                <div class="comment">
+                  <div class="user-popover-box popover">
+                    <div class="avatar" style="background-image: url('https://b-gold-cdn.xitu.io/v3/static/img/emoji.5594dbb.svg')"></div>
+                  </div>
+                  <div class="content-box comment-divider-line">
+                    <div class="meta-box">
+                      <div class="user-popover-box username">夏日里的一把阳光</div>
+                    </div>
+                    <div class="content">
+                      撒打扫打扫打扫打扫打扫大
+                    </div>
+                    <div class="reply-stat">
+                      <span class="time">2分钟前</span>
+                      <div class="action-boxs">
+                        <div class="comment-action">
+
+                          <svg data-v-6bbbea0a="" aria-hidden="true" width="16" height="16" viewBox="0 0 20 20" class="icon comment-icon"><g data-v-6bbbea0a="" fill="none" fill-rule="evenodd"><path data-v-6bbbea0a="" d="M0 0h20v20H0z"></path> <path data-v-6bbbea0a="" stroke="#8A93A0" stroke-linejoin="round" d="M10 17c-4.142 0-7.5-2.91-7.5-6.5S5.858 4 10 4c4.142 0 7.5 2.91 7.5 6.5 0 1.416-.522 2.726-1.41 3.794-.129.156.41 3.206.41 3.206l-3.265-1.134c-.998.369-2.077.634-3.235.634z"></path></g></svg>
+                          <span class="action-title">回复</span>
+                        </div>
+
+
+                      </div>
+
+                    </div>
+                    <div class="sub-comment-list">
+                      <div class="item">
+                        <div class="sub-comment">
+                          <div class="sub-comment-content-row">
+                            <div class="user-popover-box popover">
+                              <div class="avatar" style="background-image: url('https://avatars0.githubusercontent.com/u/16717068?v=3')"></div>
+                            </div>
+                            <div class="user-content-box">
+                              <div class="profie">夏日里的一把阳光</div>
+                              <div class="content-box">撒打扫打扫打扫打扫打扫大所多岁的</div>
+                              <div class="sub-comment-stat-box">2分钟前</div>
+
+                            </div>
+
+
+                          </div>
+
+
+                        </div>
+
+
+                      </div>
+
+
+                    </div>
+
+
+                  </div>
+
+
+
+                </div>
               </div>
+
+
             </div>
 
 
@@ -25,189 +174,14 @@
 
 
 
-               <div class="detail">
-                 <div class="top">
-                   <h5 class="title">{{data.title}}</h5>
-
-                     <ul class="desc">
-                       <li class="item hot">
-                         热
-                       </li>
-                       <li class="item post">
-                         专栏
-                       </li>
-                       <li class="item cursor-p tag">
-                         得瑟得瑟
-                       </li>
-                       <li class="item cursor-p">
-                         但是当时的
-                       </li>
-                       <li class="item cursor-p tag">
-                         但是当时的
-                       </li>
-                       <li class="item cursor-p tag">
-                         2018年6月23日
-                       </li>
-                     </ul>
-
-                 </div>
-                 <div class="article-content">
-
-                   在npm、yarn等包管理工具的帮助下，前端工程化模块化的进程日益加快，项目的依赖包也日益增大，特别是若项目采用webpack来构建用到许多webpack的插件、一些辅助开发如（eslint、postcss、dev-server之类的库）以及一些单元测试(jest、mocha、enzyme)可能需要用到的插件，项目中的node_module就会变的十分庞大。
-                   如图：
-
-                   如果搭配这种情况是不是很绝望：
-
-                   因此团队开发者每次重新初始化项目进行npm install会十分缓慢，并且若占用大量空间，更进一步来说项目中往往很多前端团队会用到一台构建服务器，对前端项目的代码获取、打包、构建、部署进行管理（例如笔者自己所在的团队就在使用jenkins对前端项目的打包、构建、部署进行自动化托管）。npm这样的项目级依赖管理的特性就会造成大量的时间以及资源的消耗。
-                   同时笔者也想在文章开始之前表明一个态度，npm本身portable的模块化设计，使每个项目互不干系，也是一种它设计的精华所在，本文仅是针对实际使用中遇到的一些小困扰进行解读，希望提供一个新的思路。
-                   补充一下，实际yarn已经有了解决方案 - workspaces：
-                   Workspaces in Yarn
-                   本文暂不把yarn容纳到讨论范围内。
-                   此本篇文章就在这样的背景下诞生了。纯粹是笔者在项目中积累的一些经验，若有不足望指出。
-                   二、先来说说示例
-                   github仓库地址：github.com/Roxyhuang/n…
-                   通常现代前端的标准工程往往具备以下功能，为了让这个讨论更贴近实际开发，并且更直观，因此规定示例项目基本具备以下这些能力：
-                   (1) 提供dev-server
-                   (2) 提供语法转译（babel）
-                   (3) 能够解析样式
-                   (4) js代码风格插件以及样式风格检查
-                   (5) 单元测试
-                   (6) 提供样式兼容处理
-                   当然以上部分只体现的依赖层面。因此可能有些依赖的引入可能出现错误或者不合理。
-                   并假设目前团队使用了webpack和parcel两套前端构建方案，团队项目中有使用了React和Vue。
-                   三、问题的总结
-                   若不对项目做任何优化以及设置正常项目的依赖的结构应该是这样的：
-                   如图：
-
-                   作者：Neo_Huang
-                   链接：https://juejin.im/post/5c277dec6fb9a049a62caa99
-                   来源：掘金
-                   著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
-
-                 </div>
-
-                 <div class="comment-list-box">
-                   <div class="title">评论</div>
-                   <div class="comment-form">
-                     <div class="avatar-box">
-                       <div class="avatar" style="background-image: url('https://avatars0.githubusercontent.com/u/16717068?v=3')"></div>
-                     </div>
-                     <div class="form-box">
-                       <div class="input-box">
-                         <div class="rich-input empty" contenteditable="true" spellcheck="true" placeholder="输入评论...">
-
-                         </div>
-                       </div>
-                       <div class="action-box">
-                         <div class="emoji emoji-btn">
-                           <div class="emoji-box">
-                             <div class="icon" style="background-image: url('https://b-gold-cdn.xitu.io/v3/static/img/emoji.5594dbb.svg')"></div>
-                             <span>表情</span>
-                           </div>
-                         </div>
-
-
-                       </div>
-                       <div class="submit">
-                         <span>Ctrl or ⌘ + Enter</span>
-                         <button class="submit-btn">评论</button>
-
-                       </div>
-
-                     </div>
-
-
-                   </div>
-
-                   <div class="comment-list">
-                     <div class="item">
-                       <div class="comment">
-                         <div class="user-popover-box popover">
-                           <div class="avatar" style="background-image: url('https://b-gold-cdn.xitu.io/v3/static/img/emoji.5594dbb.svg')"></div>
-                         </div>
-                         <div class="content-box comment-divider-line">
-                           <div class="meta-box">
-                             <div class="user-popover-box username">夏日里的一把阳光</div>
-                           </div>
-                           <div class="content">
-                             撒打扫打扫打扫打扫打扫大
-                           </div>
-                           <div class="reply-stat">
-                             <span class="time">2分钟前</span>
-                             <div class="action-boxs">
-                               <div class="comment-action">
-
-                                   <svg data-v-6bbbea0a="" aria-hidden="true" width="16" height="16" viewBox="0 0 20 20" class="icon comment-icon"><g data-v-6bbbea0a="" fill="none" fill-rule="evenodd"><path data-v-6bbbea0a="" d="M0 0h20v20H0z"></path> <path data-v-6bbbea0a="" stroke="#8A93A0" stroke-linejoin="round" d="M10 17c-4.142 0-7.5-2.91-7.5-6.5S5.858 4 10 4c4.142 0 7.5 2.91 7.5 6.5 0 1.416-.522 2.726-1.41 3.794-.129.156.41 3.206.41 3.206l-3.265-1.134c-.998.369-2.077.634-3.235.634z"></path></g></svg>
-                                 <span class="action-title">回复</span>
-                               </div>
-
-
-                             </div>
-
-                           </div>
-                           <div class="sub-comment-list">
-                             <div class="item">
-                               <div class="sub-comment">
-                                 <div class="sub-comment-content-row">
-                                   <div class="user-popover-box popover">
-                                     <div class="avatar" style="background-image: url('https://avatars0.githubusercontent.com/u/16717068?v=3')"></div>
-                                   </div>
-                                   <div class="user-content-box">
-                                     <div class="profie">夏日里的一把阳光</div>
-                                     <div class="content-box">撒打扫打扫打扫打扫打扫大所多岁的</div>
-                                     <div class="sub-comment-stat-box">2分钟前</div>
-
-                                   </div>
-
-
-                                 </div>
-
-
-                               </div>
-
-
-                             </div>
-
-
-                           </div>
-
-
-                         </div>
 
 
 
-                       </div>
-                     </div>
-
-
-                   </div>
-
-
-
-
-
-
-
-
-
-                 </div>
-
-
-               </div>
           </div>
 
-          <!--nav 右边公用菜单-->
-          <user-view></user-view>
 
-        </el-row>
-
+        </div>
       </div>
-    </el-main>
-
-
-  </el-container>
-
-
 
 </template>
 

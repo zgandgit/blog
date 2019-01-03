@@ -65,7 +65,7 @@
 
     <div class="profile-box bg-c1">
       <div class="user-recommend-header">
-        <span>推荐书籍</span>
+        <span>推荐文档</span>
       </div>
       <ul class="link-list">
         <li class="item">
@@ -118,9 +118,6 @@
           </a>
         </li>
         <li class="item">
-          <a href="" class="lawLink">
-            本站源码下载
-          </a>
           <a href="" class="lawLink">
             接口注册
           </a>

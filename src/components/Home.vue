@@ -2,7 +2,7 @@
   <el-container>
 
     <el-header class="bg-c1">
-      <head-view v-bind:name="'1'"></head-view>
+      <head-view v-bind:name="'/'"></head-view>
     </el-header>
 
     <el-main>
@@ -38,7 +38,7 @@
 
                   </div>
                   <div class="info-row">
-                    <router-link :to="{ path: 'Detail',query:{id:1}}" target="_blank" class="title">
+                    <router-link :to="{ path: 'Essay',query:{id:1}}" target="_blank" class="title">
                       {{v.title}}
                     </router-link>
                   </div>

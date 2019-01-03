@@ -106,8 +106,21 @@ a{
 .cursor-p{
   cursor: pointer;
 }
-
-
+.pdc-16{
+  padding:16px;
+}
+.pdlr-2{
+  padding:0 20px 0 20px;
+}
+.fz-16{
+  font-size: 16px;
+}
+.fz-14{
+  font-size: 14px;
+}
+.cor-1{
+  color: #409EFF;
+}
 /*首页内容区域*/
 .details{
 
@@ -476,21 +489,22 @@ a{
   cursor: pointer;
 }
 .panel-btn.with-badge span {
-  width: 20px;
-  height: 12px;
+  height: 16px;
   content: attr(badge);
   position: absolute;
   top: 0;
   left: 75%;
   padding: 1px 4px;
-  font-size: 10px;
+  font-size: 12px;
   text-align: center;
-  line-height: 12px;
+  line-height: 16px;
   white-space: nowrap;
   color: #fff;
   background-color: #b2bac2;
   border-radius: 7px;
+  -webkit-transform-origin: left top;
   transform-origin: left top;
+  -webkit-transform: scale(.75);
   transform: scale(.75);
 }
 .share-title{

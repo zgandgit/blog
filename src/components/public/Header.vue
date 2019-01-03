@@ -4,14 +4,16 @@
     <el-row>
       <div class="container">
         <el-row>
-          <el-col :span="6" class="te-l">
+          <el-col :span="4" class="te-l">
             <img class="hh-4 mt-1" src="https://b-gold-cdn.xitu.io/v3/static/img/logo.a7995ad.svg" alt="">
           </el-col>
-          <el-col :span="8">
-            <el-menu :default-active="indexCode" class="el-menu-demo" mode="horizontal" @select="handleSelect">
-              <el-menu-item index="1">首页</el-menu-item>
-              <el-menu-item index="2">关于我</el-menu-item>
-              <el-menu-item index="3">留言</el-menu-item>
+          <el-col :span="10">
+            <el-menu :default-active="indexCode" class="el-menu-demo" mode="horizontal" :router="true">
+              <el-menu-item index="/">技术帖</el-menu-item>
+              <el-menu-item index="/about">技术教程</el-menu-item>
+              <el-menu-item index="/activity">活动</el-menu-item>
+              <el-menu-item index="/message">赞赏留言</el-menu-item>
+
             </el-menu>
           </el-col>
           <el-col :span="6">
@@ -26,11 +28,13 @@
             <ul class="lh-6">
 
               <li class="float-r">
-                <a href="">
                   <img class="bor-cover mt-1 ml-2" width="40" height="40" src="https://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTI9Wf73uXyCyAvO4wbs3pib8RZuReSSOvZBysWQlSiaZHpFJJh4qbM7D0WP8xtr5NyJdoRDKbpVdicEA/132" alt="夏日阳光">
+              </li>
+              <li class="float-r cursor-p pdlr-2 fz-14">
+                <a href="" class="hover-1 cor-1">
+
                 </a>
               </li>
-              <li class="float-r hover-1 cursor-p"> <i class="el-icon-share"></i></li>
             </ul>
 
 
@@ -51,7 +55,7 @@
         props:["name"],
         data () {
           return {
-            indexCode: '1',
+            indexCode: '/',
             vueText: ''
           }
         },
@@ -60,32 +64,7 @@
           this.indexCode = code;
       },
         methods: {
-          handleSelect(key, keyPath) {
-            if(key == '1'){
-              //首页
-              this.$router.push({
-                path: '/'
-              })
 
-              }else if(key == '2'){
-              //关于我
-              this.$router.push({
-                path: '/about'
-              })
-
-            }else if(key == '3'){
-              //给我留言
-              this.$router.push({
-                path: '/message'
-              })
-            }else{
-              //默认首页
-              this.$router.push({
-                path: '/'
-              })
-            }
-
-          }
       }
 
     }

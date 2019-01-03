@@ -2,7 +2,7 @@
   <el-container>
 
     <el-header class="bg-c1">
-      <head-view v-bind:name="'/about'"></head-view>
+      <head-view v-bind:name="'/activity'"></head-view>
     </el-header>
 
     <el-main>
@@ -22,36 +22,29 @@
 
 
           <div>
-            <el-col :span="6" v-for="i in 60" class="main">
-              <el-card shadow="hover">
-                <div class="cover" style="background-image: url('https://user-gold-cdn.xitu.io/154459366704059850a004eff275d4cf807154b3da2ce.jpg')"></div>
-                <div class="desc">
-                  <div class="title">php初级教程</div>
-                  <div class="date">
-                    <span class="icon"></span>
-                    <span>中级</span>
-
-                    <span class="icon ml-2 sction"></span>
-                    <span>72章</span>
-                  </div>
-                  <div class="bottom">
-                    <div class="address">
-                      <span class="icon"></span>
-                      <span>2666</span>
-                    </div>
-
-                    <router-link :to="{ path: 'Course',query:{id:1}}" target="_blank">
-                      <div class="btn-join">
-                        查看我
-                      </div>
-                    </router-link>
-
-
-
-                  </div>
+          <el-col :span="6" v-for="i in 60" class="main">
+            <el-card shadow="hover">
+              <div class="cover" style="background-image: url('https://user-gold-cdn.xitu.io/154459366704059850a004eff275d4cf807154b3da2ce.jpg')"></div>
+              <div class="desc">
+                <div class="title">三天蜕变，攻坚 CKA 集训营</div>
+                <div class="date">
+                  <span class="icon"></span>
+                  <span>01-04 周五</span>
                 </div>
-              </el-card>
-            </el-col>
+                <div class="bottom">
+                  <div class="address">
+                    <span class="icon"></span>
+                    <span>杭州</span>
+                  </div>
+                  <div class="btn-join">
+                    查看详情
+                  </div>
+
+
+                </div>
+              </div>
+            </el-card>
+          </el-col>
           </div>
 
         </el-row>
@@ -64,7 +57,7 @@
 
 <script>
   export default {
-    name: 'About'
+    name: 'Activity'
 
   }
 </script>
@@ -87,7 +80,7 @@
     text-overflow: ellipsis;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
-    height: 30px;
+    height: 40px;
     font-size: 14px;
     font-weight: 700;
   }
@@ -106,10 +99,7 @@
 
   }
   .activity .desc .date .icon{
-    background-image: url('../../static/images/class.png');
-  }
-  .activity .desc .date .sction{
-    background-image: url('../../static/images/section.png');
+    background-image: url('../../static/images/time.png');
   }
   .activity .desc span{
     vertical-align: middle;
@@ -133,9 +123,8 @@
     text-align: center;
   }
   .activity .desc .bottom .icon{
-    background-image: url('../../static/images/browse.png');
+    background-image: url('../../static/images/sign.png');
   }
-
   .activity .main{
     margin-bottom: 20px;
   }
