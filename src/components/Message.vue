@@ -10,11 +10,7 @@
         <el-row>
           <div class="bg-c1 menu-cx main-l">
             <el-card class="box-card">
-              <p>
-                <el-badge :value="12" class="item">
-                  <el-button size="small">赞赏</el-button>
-                </el-badge>
-              </p>
+
               <p class="desc">
                 我是技术菜鸟，对于深奥的技术不太了解，做这个博客一方面是想记录自己的技术笔记，第二各方面也是希望对广大技术人员有些帮助。
                 如果您认为本网站的教程质量不错，读后觉得有很大收获，不妨小额赞助我一下，让我有活下去的勇气(┬＿┬)(┬＿┬)(┬＿┬)。
@@ -38,11 +34,6 @@
                 </el-col>
               </el-row>
               <p class="desc">
-                <el-badge :value="12" class="item">
-                  <el-button size="small">留言</el-button>
-                </el-badge>
-              </p>
-
               <el-row :gutter="12">
                 <el-form ref="form" :model="form">
                   <el-form-item>
@@ -50,9 +41,14 @@
                   </el-form-item>
                 </el-form>
               </el-row>
+              </p>
+
 
               <el-row :gutter="12">
                 <el-col :span="12">
+                  <el-badge :value="12" class="item">
+                    <el-button size="small">赞赏</el-button>
+                  </el-badge>
                   <el-table
                     :data="tableData"
                     border
@@ -72,7 +68,9 @@
 
                 </el-col>
                 <el-col :span="12">
-
+                  <el-badge :value="12" class="item">
+                    <el-button size="small">留言</el-button>
+                  </el-badge>
                   <el-table
                     :data="tableData"
                     border

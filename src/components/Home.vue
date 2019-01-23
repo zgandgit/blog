@@ -22,8 +22,8 @@
                       <li class="item hot" v-if="v.hot != ''">
                         {{v.hot}}
                       </li>
-                      <li class="item post">
-                        {{v.type}}
+                      <li class="item post" v-if="v.recommend != '2'">
+                        推荐
                       </li>
                       <li class="item cursor-p tag">
                         {{v.author}}
@@ -107,7 +107,6 @@
 
       </div>
     </el-main>
-
   </el-container>
 </template>
 
@@ -121,166 +120,46 @@
         muses: {
           'popular' :{
             'title':'最新',
-            'data':[
-              {
-                'hot': '热',
-                'type':'专栏',
-                'author':'小逛逛还是',
-                'time': '1小时前',
-                'skill': 'PHP',
-                'title': '教你从零开始搭建一款前端脚手架工具',
-                'cover': 'https://b-gold-cdn.xitu.io/v3/static/img/zan.e9d7698.svg',
-                'like': 126,
-                'discuss': 52,
-                'share': 1
-              },
-              {
-                'hot': '推荐',
-                'type':'专栏',
-                'author':'小逛逛还是',
-                'time': '1小时前',
-                'skill': 'PHP',
-                'title': '教你从零开始搭建一款前端脚手架工具',
-                'cover': 'https://b-gold-cdn.xitu.io/v3/static/img/zan.e9d7698.svg',
-                'like': 126,
-                'discuss': 52,
-                'share': 1
-              },
-              {
-                'hot': '精品',
-                'type':'专栏',
-                'author':'小逛逛还是',
-                'time': '1小时前',
-                'skill': 'PHP',
-                'title': '教你从零开始搭建一款前端脚手架工具',
-                'cover': 'https://b-gold-cdn.xitu.io/v3/static/img/zan.e9d7698.svg',
-                'like': 126,
-                'discuss': 52,
-                'share': 1
-              },
-              {
-                'hot': '',
-                'type':'专栏',
-                'author':'小逛逛还是',
-                'time': '1小时前',
-                'skill': 'PHP',
-                'title': '教你从零开始搭建一款前端脚手架工具',
-                'cover': 'https://b-gold-cdn.xitu.io/v3/static/img/zan.e9d7698.svg',
-                'like': 126,
-                'discuss': 52,
-                'share': 1
-              },
-              {
-                'hot': '',
-                'type':'专栏',
-                'author':'小逛逛还是',
-                'time': '1小时前',
-                'skill': 'PHP',
-                'title': '教你从零开始搭建一款前端脚手架工具',
-                'cover': 'https://b-gold-cdn.xitu.io/v3/static/img/zan.e9d7698.svg',
-                'like': 126,
-                'discuss': 52,
-                'share': 1
-              },
-              {
-                'hot': '',
-                'type':'专栏',
-                'author':'小逛逛还是',
-                'time': '1小时前',
-                'skill': 'PHP',
-                'title': '教你从零开始搭建一款前端脚手架工具',
-                'cover': 'https://b-gold-cdn.xitu.io/v3/static/img/zan.e9d7698.svg',
-                'like': 126,
-                'discuss': 52,
-                'share': 1
-              },
-              {
-                'hot': '',
-                'type':'专栏',
-                'author':'小逛逛还是',
-                'time': '1小时前',
-                'skill': 'PHP',
-                'title': '教你从零开始搭建一款前端脚手架工具',
-                'cover': 'https://b-gold-cdn.xitu.io/v3/static/img/zan.e9d7698.svg',
-                'like': 126,
-                'discuss': 52,
-                'share': 1
-              }
-
-            ]
+            'data': ''
           },
           'newest'  : {
             'title':'最热',
-            'data':''
+            'data': ''
           },
           'comment' : {
             'title':'评论',
-            'data':[
-              {
-                'hot': '热评论',
-                'type':'专栏',
-                'author':'小逛逛还是',
-                'time': '1小时前',
-                'skill': 'PHP',
-                'title': '教你从零开始搭建一款前端脚手架工具',
-                'cover': 'https://b-gold-cdn.xitu.io/v3/static/img/zan.e9d7698.svg',
-                'like': 126,
-                'discuss': 52,
-                'share': 1
-              },
-              {
-                'hot': '推荐评论',
-                'type':'评论',
-                'author':'小的旧时光',
-                'time': '1小时前',
-                'skill': 'PHP',
-                'title': '教你从零开始搭建一款前端脚手架工具',
-                'cover': 'https://b-gold-cdn.xitu.io/v3/static/img/zan.e9d7698.svg',
-                'like': 126,
-                'discuss': 52,
-                'share': 1
-              },
-              {
-                'hot': '精品',
-                'type':'专栏',
-                'author':'小逛逛多岁的还是',
-                'time': '1小时前',
-                'skill': 'PHP',
-                'title': '教你从零开始搭建一款前端脚手架工具',
-                'cover': 'https://b-gold-cdn.xitu.io/v3/static/img/zan.e9d7698.svg',
-                'like': 126,
-                'discuss': 52,
-                'share': 1
-              },
-              {
-                'hot': '',
-                'type':'专栏',
-                'author':'的四点多',
-                'time': '1小时前',
-                'skill': 'PHP',
-                'title': '教你从零开始搭建一款前端脚手架工具',
-                'cover': 'https://b-gold-cdn.xitu.io/v3/static/img/zan.e9d7698.svg',
-                'like': 126,
-                'discuss': 52,
-                'share': 1
-              }
-
-            ]
+            'data':''
           }
         }
       }
     },
+    created: function() {
+      this.invitationList();//默认按照热度排序
+    },
     methods: {
       museSelect: function (key, keyPath) {
-        let _this = this;
+        var _this = this;
         _this.menuActive = key;
-
         const loading = this.$loading();
-        setTimeout(() => {
-          loading.close();
-        }, 800);
-
+        _this.invitationList();
       },
+      invitationList: function () {
+        var _this = this
+        let menuCode = _this.menuActive
+        _this.$axios.post(_this.Configs.homeList,{
+          sort:menuCode
+        })
+          .then(function(res){
+            let code = res.data.code;//状态
+            if(code === 200){
+              let record = res.data.data;//接收的数据
+               _this.muses[menuCode].data = record
+               _this.$loading().close()
+            }
+          })
+
+
+          },
       openCenter:function (e) {
         let _this = this;
         let actice = _this.menuActive;

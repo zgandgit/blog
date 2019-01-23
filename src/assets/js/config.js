@@ -1,5 +1,7 @@
-//缓存文件
-const a = 'www.baidu.com'
+//
+const homeList = '/port/api/home/homeList'
+const userInfo = '/port/api/base/userInfo'
 export default {
-  a
+  homeList,
+  userInfo
 }

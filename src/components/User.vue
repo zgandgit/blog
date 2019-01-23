@@ -3,28 +3,28 @@
 
     <div class="profile-box bg-c1">
       <div class="profile">
-        <div class="avatar" :style="{backgroundImage: 'url('+'https://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTI9Wf73uXyCyAvO4wbs3pib8RZuReSSOvZBysWQlSiaZHpFJJh4qbM7D0WP8xtr5NyJdoRDKbpVdicEA/132'+')',backgroundSize:'cover'}"> </div>
+        <div class="avatar" :style="{backgroundImage: 'url('+user.portrait+')',backgroundSize:'cover'}"> </div>
         <div class="user-info">
-          <div class="username">夏日里的一把阳光</div>
-          <div class="position">一个逗比程序员</div>
+          <div class="username">{{user.name}}</div>
+          <div class="position">{{user.introduce}}</div>
         </div>
       </div>
       <ul class="stat-list">
         <li class="item">
-          <a href="">
+          <a :href="user.weibo" target="_blank">
             <img class="img" src="../../static/images/ico1.png" alt="">
             <div class="count">微博</div>
           </a>
 
         </li>
         <li class="item">
-          <a href="">
+          <a :href="user.github" target="_blank">
             <img class="img" src="../../static/images/ico2.png" alt="">
             <div class="count">GitHub</div>
           </a>
         </li>
         <li class="item">
-          <a href="">
+          <a :href="user.qq" target="_blank">
             <img class="img" src="../../static/images/ico3.png" alt="">
             <div class="count">Qq群</div>
           </a>
@@ -34,19 +34,13 @@
     </div>
 
     <div class="banner-block">
-      <a href="">
-        <div class="banner" :style="{backgroundImage: 'url('+'https://user-gold-cdn.xitu.io/1545907481431729ddf7a12b4e58e4c4dfeee4286b83f.jpg?imageView2/1/q/85/interlace/1'+')'}"></div>
-      </a>
-      <a href="" class="label">
-        <span>广告</span>
-      </a>
-
-
+        <a href="">
+          <div class="banner" :style="{backgroundImage: 'url('+advertising.cover+')'}"></div>
+        </a>
+        <a :href="advertising.url" target="_blank" class="label">
+          <span>广告</span>
+        </a>
     </div>
-
-
-
-
 
     <div class="profile-box bg-c1">
       <div class="user-recommend-header">
@@ -58,11 +52,8 @@
         <el-tag size="medium" type="info">mysql</el-tag>
         <el-tag size="medium" type="warning">vue</el-tag>
         <el-tag size="medium" type="danger">js</el-tag>
-
       </div>
-
     </div>
-
     <div class="profile-box bg-c1">
       <div class="user-recommend-header">
         <span>推荐文档</span>
@@ -150,17 +141,49 @@
 
     </div>
 
-
-
-
-
-
   </div>
 </template>
 
 <script>
     export default {
-        name: "User"
+        name: "User",
+        data() {
+          return {
+            user: '',//个人信息
+            advertising: '',//广告
+            label: '',//标签
+            books: '',//书籍
+            deploy:'',//配置
+            blogroll: ''//友情链接
+
+          }
+        },
+        created: function() {
+          this.siteinfo()
+        },
+        methods: {
+          siteinfo: function () {
+            var _this = this
+            _this.$axios.post(_this.Configs.userInfo,{
+
+            })
+              .then(function(res){
+                let code = res.data.code;//状态
+                if(code === 200){
+                  let record = res.data.data;//接收的数据
+                    _this.user = record.user
+                    _this.advertising = record.advertising
+                    _this.label = record.label
+                    _this.books = record.books
+                    _this.deploy = record.deploy
+                    _this.blogroll = record.blogroll
+                }
+              })
+
+
+          }
+
+        }
     }
 </script>
 

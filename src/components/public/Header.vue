@@ -11,7 +11,7 @@
             <el-menu :default-active="indexCode" class="el-menu-demo" mode="horizontal" :router="true">
               <el-menu-item index="/">技术帖</el-menu-item>
               <el-menu-item index="/about">技术教程</el-menu-item>
-              <el-menu-item index="/activity">活动</el-menu-item>
+              <!--<el-menu-item index="/activity">活动</el-menu-item>-->
               <el-menu-item index="/message">赞赏留言</el-menu-item>
 
             </el-menu>
@@ -36,8 +36,6 @@
                 </a>
               </li>
             </ul>
-
-
 
           </el-col>
         </el-row>
