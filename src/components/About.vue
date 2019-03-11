@@ -11,38 +11,36 @@
 
 
         <el-row :gutter="12">
-          <el-carousel :interval="4000" type="card" height="200px">
+          <el-carousel :interval="4000" type="card" height="200px" class="conceal-hide">
             <el-carousel-item v-for="item in 6" :key="item">
-              <div class="imgs" style="background-image: url('https://gw.alipayobjects.com/zos/rmsportal/MlWOvzoWNagIFfylgkim.png')">
-                <!--<h3>{{ item }}</h3>-->
+              <div class="imgs" style="background-color: #cccccc">
               </div>
-
             </el-carousel-item>
           </el-carousel>
 
-
           <div>
-            <el-col :span="6" v-for="i in 60" class="main">
+            <el-col :span="6" v-for="(v,i) in courseList" class="main about-min">
               <el-card shadow="hover">
-                <div class="cover" style="background-image: url('https://user-gold-cdn.xitu.io/154459366704059850a004eff275d4cf807154b3da2ce.jpg')"></div>
+                <div class="cover" :style="{backgroundImage: 'url(' +host+v.resource.url + ')' }"></div>
                 <div class="desc">
-                  <div class="title">php初级教程</div>
+                  <div class="title">{{v.title}}</div>
                   <div class="date">
                     <span class="icon"></span>
-                    <span>中级</span>
-
-                    <span class="icon ml-2 sction"></span>
-                    <span>72章</span>
+                    <span>{{v.intro}}</span>
+                  </div>
+                  <div class="date">
+                    <span class="icon sction"></span>
+                    <span>{{v.num}}章</span>
                   </div>
                   <div class="bottom">
                     <div class="address">
                       <span class="icon"></span>
-                      <span>2666</span>
+                      <span>{{v.page_view}}</span>
                     </div>
 
-                    <router-link :to="{ path: 'Course',query:{id:1}}" target="_blank">
+                    <router-link v-if="v.artice != null" :to="{ path: 'Course',query:{id:v.artice.aid,cid:v.id}}" target="_blank">
                       <div class="btn-join">
-                        查看我
+                        查看
                       </div>
                     </router-link>
 
@@ -54,6 +52,20 @@
             </el-col>
           </div>
 
+
+
+        </el-row>
+        <el-row :gutter="12">
+          <div class="page">
+            <el-pagination
+                    background
+                    @current-change="handleCurrentChange"
+                    :page-size="num"
+                    layout="prev, pager, next"
+                    :current-page="page"
+                    :total="total">
+            </el-pagination>
+          </div>
         </el-row>
 
       </div>
@@ -64,13 +76,56 @@
 
 <script>
   export default {
-    name: 'About'
+    name: 'About',
+      data(){
+          return{
+              host:this.Configs.host,
+              courseList:'',
+              num: 10,//每页查询的条数
+              page: 1,//当前页数
+              total:0//总条数
+          }
+      },
+      created: function () {
+          let _this = this
+      },
+      mounted: function (){
+          //获取教程列表
+          this.courses()
+      },
+      methods: {
+          courses: function () {
+              let _this = this
+              _this.$axios.post(_this.Configs.courseList, {
+                  num   :  _this.num,//每页查询的条数
+                  page  :  _this.page//第几页
+              })
+                  .then(function (res) {
+
+                      let code = res.data.code//状态
+                      if (code === 200) {
+                          let record = res.data.data//接收的数据
+                          _this.courseList = record.data
+                          _this.page = record.current_page
+                          _this.total = record.total
+                      } else {
+                          _this.$message(res.data.msg)
+                      }
+                  })
+          },
+          handleCurrentChange:function (val) {
+              let _this = this
+              _this.page = val
+              _this.courses();//教程列表
+          },
+      }
 
   }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+  .page{text-align: center}
   .activity .cover{
     height: 160px;
     margin:-20px -20px 0px -20px;
@@ -93,6 +148,7 @@
   }
   .activity .desc .date{
     margin-top: 6px;
+    display: flex;
   }
   .activity .desc .icon{
     width: 16px;
@@ -113,6 +169,9 @@
   }
   .activity .desc span{
     vertical-align: middle;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   .activity .desc .bottom{
     margin-top: 6px;

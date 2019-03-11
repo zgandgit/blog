@@ -7,22 +7,41 @@
 
     <el-main>
       <div class="container bor-6 activity">
-
-
-
-        <el-row :gutter="12">
-          <el-carousel :interval="4000" type="card" height="200px">
+        <el-row :gutter="12"  v-if="true">
+          <el-carousel :interval="4000" type="card" height="200px" class="conceal-hide">
             <el-carousel-item v-for="item in 6" :key="item">
-              <div class="imgs" style="background-image: url('https://gw.alipayobjects.com/zos/rmsportal/MlWOvzoWNagIFfylgkim.png')">
+              <div class="imgs" style="background-color: #cccccc">
                 <!--<h3>{{ item }}</h3>-->
               </div>
-
             </el-carousel-item>
           </el-carousel>
 
 
           <div>
-          <el-col :span="6" v-for="i in 60" class="main">
+
+            <el-col v-for="i in 20" class="main div-block">
+              <el-card shadow="hover">
+                <div class="cover" style="background-image: url('https://user-gold-cdn.xitu.io/154459366704059850a004eff275d4cf807154b3da2ce.jpg')"></div>
+                <div class="desc">
+                  <div class="title">三天蜕变，攻坚 CKA 集训营</div>
+                  <div class="date">
+                    <span class="icon"></span>
+                    <span>01-04 周五</span>
+                  </div>
+                  <div class="bottom">
+                    <div class="address">
+                      <span class="icon"></span>
+                      <span>杭州</span>
+                    </div>
+                    <div class="btn-join">
+                      查看详情
+                    </div>
+                  </div>
+                </div>
+              </el-card>
+            </el-col>
+
+          <el-col :span="6" v-for="i in 20" class="main conceal-hide">
             <el-card shadow="hover">
               <div class="cover" style="background-image: url('https://user-gold-cdn.xitu.io/154459366704059850a004eff275d4cf807154b3da2ce.jpg')"></div>
               <div class="desc">
@@ -39,12 +58,12 @@
                   <div class="btn-join">
                     查看详情
                   </div>
-
-
                 </div>
               </div>
             </el-card>
           </el-col>
+
+
           </div>
 
         </el-row>

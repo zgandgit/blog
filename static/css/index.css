@@ -63,7 +63,9 @@ a{
 .hh-4{
   height: 40px;
 }
-
+.hh-6{
+  height: 60px;
+}
 
 /*距离头部的距离*/
 .mt-1{
@@ -237,6 +239,7 @@ a{
   margin-left: 2rem;
   background-color: #fff;
   border-radius: 2px;
+  background-size: cover;
 }
 /*首页内容区域 结束*/
 .sidebar .profile-box{
@@ -318,9 +321,15 @@ a{
 }
 .sidebar .profile-box .tag-list{
   padding: 10px 16px 10px 16px;
+  cursor : pointer;
+  display: flex;
+  flex-wrap: wrap-reverse;
+  justify-content: space-between;
+  text-align: center;
 }
 .sidebar .profile-box .tag-list span{
   margin-bottom: 6px;
+  width: 30%;
 }
 .banner-block{
   background-color: #fff;
@@ -389,6 +398,69 @@ a{
   color: #333;
 }
 
+.sidebar .profile-box .link-list .books{
+
+}
+
+.sidebar .profile-box .link-list .books .poster{
+  background-size: cover;
+  margin-right: 10px;
+  flex-shrink: 0;
+  height: 72px;
+  width: 52px;
+  box-shadow: 0 2px 7px 0 rgba(0,0,0,.26);
+  /*background-image: url(https://user-gold-cdn.xitu.io/2018/12/4/16779ed4b21a9fa5?imageView2/1/w/200/h/280/q/95/format/webp/interlace/1);*/
+}
+
+.sidebar .profile-box .link-list .books .info{
+  flex-grow: 1;
+}
+.sidebar .profile-box .link-list .books .info .title{
+  max-height: 52px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.3;
+  margin-bottom: 5px;
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
+.sidebar .profile-box .link-list .books .info .bought{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.sidebar .profile-box .link-list .books .info .bought .num{
+  font-size: 12px;
+  color: #878c90;
+}
+
+.sidebar .profile-box .link-list .books .info .bought .try-read{
+  height: 20px;
+  color: #fff;
+  font-size: 12px;
+  padding-left: 5px;
+  line-height: 20px;
+  padding-right: 5px;
+  border-radius: 2px;
+  background-color: #007fff;
+  display: flex;
+  align-items: center;
+}
+.sidebar .profile-box .link-list .books .info .bought .try-read:after {
+  width: 0;
+  height: 0;
+  content: "";
+  display: inline-block;
+  margin-left: 3px;
+  border-color: transparent transparent transparent #fff;
+  border-style: solid;
+  border-width: 3px 0 3px 3px;
+}
 
 .sidebar .profile-box .more-list{
   font-size: 13px;
@@ -413,7 +485,7 @@ a{
   width: 70%;
   float: left;
   border-radius: 3px;
-  overflow: hidden;
+  /*overflow: hidden;*/
 }
 .main-r{
   width: 28%;
@@ -466,7 +538,19 @@ a{
   width: 100%;
   image-rendering: pixelated;
 }
-
+.share-panel .share-item .qr-code-box .qr-code img{
+  width: 100%;
+}
+.ewms:hover img{
+  display: block;
+}
+.ewms img{
+  position: absolute;
+  top: 100%;
+  width: 90px;
+  left: -50%;
+  display: none;
+}
 /*文章详情也左侧分享的东西*/
 .article-suspended-panel{
   position: fixed;
@@ -515,9 +599,91 @@ a{
   user-select: none;
 }
 
+.hljs{
+  border-radius: 8px;
+}
+.article-content p code{
+  color: #f92672;
+  background: #23241f;
+  padding: 0.4rem 1rem;
+  border-radius: 4px;
+}
+.felx-main{
+  display: flex;
+  align-items: center;
+}
+.el-dropdown-link {
+  cursor: pointer;
+  color: #409EFF;
+}
+
+.emojib{
+  vertical-align: sub;
+  width: 1.666rem;
+  height: 1.666rem;
+  cursor: default;
+  margin: 0 1px;
+}
+
+.card-isshow{
+
+}
+
+/*页面自适应问题*/
+@media (max-width: 700px){
+  .el-main{
+    padding: 10px;
+  }
+  .conceal-hide {
+    display: none;
+  }
+  .main-l{
+    width: 100%;
+  }
+  .main-r{
+    width: 100%;
+    margin-top: 20px;
+  }
+  .felx-main{
+    justify-content: space-between;
+  }
+  .nav-header{
+    width: 70%;
+  }
+  .nav-header ul{
+    display: flex;
+    justify-content: space-between;
+
+  }
+  .nav-header ul li{
+    font-size: 12px;
+    padding: 0;
+
+
+  }
+  .nav-header-user{
+    width: 30%;
+  }
+  .about-min{
+    width: 100%;
+  }
+
+
+  .card-isshow{
+
+  }
+
+}
+
+@media (min-width: 700px){
+  .div-block{
+    display: none;
+
+  }
 
 
 
+}
 
 
 
